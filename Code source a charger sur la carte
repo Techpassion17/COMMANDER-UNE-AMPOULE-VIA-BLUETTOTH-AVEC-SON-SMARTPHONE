@@ -1,0 +1,33 @@
+#include <SoftwareSerial.h>
+
+int bluetoothData; // variable de type entier 
+void setup() 
+{
+pinMode (2, OUTPUT); // le digital pin 2 en sortie (la led est branché sur cette broche)
+Serial.begin (9600); // initialise le moniteur serie
+Serial.println (" appuyez sur 1 ou 0 "); // affiche le message entre guillemet sur le moniteur serie
+ }
+
+void loop() 
+
+{
+  if (Serial.available()) // si on recoit une valeur serie
+  {
+    bluetoothData=Serial.read(); // la valeur de bluetoothData est égale a la valeur lue par le moniteur serie
+
+    if(bluetoothData=='1') // si la valeur du bluetooth data correspond a 1
+     {
+      digitalWrite(2, HIGH); // allumer la led
+      Serial.println (" LAMPE ALLUME"); // affiche le message entre guillemet sur le moniteur serie
+     }
+
+     if (bluetoothData == '0') // si la valeur du bluetooth data correspond a 0
+     {
+      digitalWrite(2, LOW); // eteindre la led
+      Serial.println (" LAMPE ETEINTE "); // affiche le message entre guillemet sur le moniteur serie
+     }
+
+     delay (500);
+  }
+
+}
